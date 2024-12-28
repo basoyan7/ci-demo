@@ -9,7 +9,7 @@ env:
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
   IMAGE_NAME: basoyan/python-app:v0.0.1
   DOCKER_FILE: Dockerfile-app
-  # DOCKER_CONTEXT: ./
+  DOCKER_CONTEXT: ./
 
 jobs:
   job1:
