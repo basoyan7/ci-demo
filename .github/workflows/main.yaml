@@ -1,23 +1,21 @@
-name: "Test Github Actions"
+name: My Action
 
 on:
   push:
     branches:
       - main
 
-
 jobs:
-  test-1:
+  job1:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: Print Something
-        run: |-
-           echo "This my variable: ${{ vars.MY_VAR }}"
-           echo "This my secret: ${{ secrets.MY_SECRET }}"
-
-
-
+      - name: Run script
+        run: |
+          myimage=basoyan/python:v0.0.1
+          docker login -u basoyan -p ${{ secrets.DOCKER_TOKEN }}
+          docker build -t $myimage -f Dockerfile-app .
+          docker push $myimage
 
