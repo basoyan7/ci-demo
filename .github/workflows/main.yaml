@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+env:
+  DOCKER_USERNAME: basoyan
 
 jobs:
   job1:
@@ -12,10 +14,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Run script
-        run: |
-          myimage=basoyan/python:v0.0.1
-          docker login -u basoyan -p ${{ secrets.DOCKER_TOKEN }}
-          docker build -t $myimage -f Dockerfile-app .
-          docker push $myimage
+      - name: Docker login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile-app
+          push: true
+          tags: basoyan/python:v0.0.1
+
 
