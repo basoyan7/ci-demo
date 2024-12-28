@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  MY_VAR: "Hello World"
+
 jobs:
   test-1:
     runs-on: ubuntu-latest
@@ -14,7 +17,7 @@ jobs:
 
       - name: Print Something
         run: |-
-           echo "Hello World"
+           echo $MY_VAR
            echo "This is a test"
            ls -la
            cat myfile.txt
@@ -27,7 +30,7 @@ jobs:
 
       - name: Print Something
         run: |-
-           echo "Hello World"
+           echo ${{ env.MY_VAR }}
            echo "This is a test"
            ls -la
            cat myfile.txt
