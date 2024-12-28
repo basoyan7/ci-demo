@@ -6,7 +6,20 @@ on:
       - main
 
 jobs:
-  test:
+  test-1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Print Something
+        run: |-
+           echo "Hello World"
+           echo "This is a test"
+           ls -la
+           cat myfile.txt
+  test-2:
     runs-on: ubuntu-latest
 
     steps:
